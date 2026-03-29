@@ -137,7 +137,8 @@ const List<Channel> channels = [
         'https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-arabic_g90v4ec/playlist_dvr.m3u8',
     tokenGenLink:
         'https://token.easybroadcast.io/all?url=https%3A%2F%2Fcdn.live.easybroadcast.io%2Fabr_corp%2F83_medi1tv-arabic_g90v4ec%2Fplaylist_dvr.m3u8',
-    imageLink: 'https://www.medi1tv.com/assets/imgs/medi1_circule_ar.png',
+    imageLink:
+        'https://upload.wikimedia.org/wikipedia/fr/c/ca/Medi_1_TV_logo.png',
     category: 'Other',
   ),
   Channel(
