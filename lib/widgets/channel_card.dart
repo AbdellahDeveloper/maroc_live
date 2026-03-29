@@ -27,10 +27,7 @@ class ChannelCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          border: Border.all(
-            color: AppColors.cardBorder,
-            width: 1,
-          ),
+          border: Border.all(color: AppColors.cardBorder, width: 1),
         ),
         child: Stack(
           children: [
@@ -40,8 +37,8 @@ class ChannelCard extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
                 child: CachedNetworkImage(
                   imageUrl: channel.imageLink,
-                  height: 80,
-                  width: 80,
+                  height: 160,
+                  width: 160,
                   fit: BoxFit.contain,
                   placeholder: (context, url) => Container(
                     height: 80,
@@ -79,8 +76,10 @@ class ChannelCard extends StatelessWidget {
               right: 0,
               bottom: 0,
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
