@@ -60,14 +60,28 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Maroc Live',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
-                    letterSpacing: -0.5,
-                  ),
+                Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        'assets/icon/logo-white.png',
+                        height: 32,
+                        width: 32,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    const Text(
+                      'Maroc Live',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                  ],
                 ),
                 const Text(
                   'Made By Abdellah El idrissi',
