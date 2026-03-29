@@ -101,4 +101,4 @@ This has already been configured in this codebase.
 ---
 
 ## 👨‍💻 Developer
-**Made By Abdellah El idrissi**
+**Abdellah El idrissi**
