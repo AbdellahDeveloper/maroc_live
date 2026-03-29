@@ -1,5 +1,7 @@
 # Maroc Live 📺
 
+![Maroc Live Screenshot](screenshots/screenshot_1.jpeg)
+
 Maroc Live is a modern, high-quality, fully functional Flutter application that serves as a **Moroccan Live Stream Directory**. It allows users to search, filter by category, favorite, and play live TV channels using HLS (`.m3u8`).
 
 ---
