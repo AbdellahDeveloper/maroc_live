@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                     'Maroc Live',
                     style: TextStyle(
                       fontSize: 28,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w900,
                       color: Colors.white,
                       letterSpacing: -0.5,
                     ),
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     color: AppColors.textSecondary,
-                    fontWeight: FontWeight.w200,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],

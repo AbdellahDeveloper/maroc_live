@@ -147,7 +147,7 @@ const List<Channel> channels = [
         'https://cdn-globecast.akamaized.net/live/eds/2m_monde/hls_video_ts_tuhawxpiemz257adfc/2m_monde.m3u8',
     headers: {'Referer': 'https://2m.ma'},
     imageLink:
-        'https://upload.wikimedia.org/wikipedia/commons/2/29/2M_TV_logo.svg',
+        'https://grandprixphoto.ma/gpp/wp-content/uploads/2024/05/image-1.png',
     category: '2M',
   ),
   Channel(
@@ -156,7 +156,7 @@ const List<Channel> channels = [
     url: 'https://maonline.xyz:8443/hls/test.m3u8',
     headers: {'Origin': 'https://foutni.com', 'Referer': 'https://foutni.com/'},
     imageLink:
-        'https://upload.wikimedia.org/wikipedia/commons/2/29/2M_TV_logo.svg',
+        'https://grandprixphoto.ma/gpp/wp-content/uploads/2024/05/image-1.png',
     category: '2M',
   ),
   Channel(
