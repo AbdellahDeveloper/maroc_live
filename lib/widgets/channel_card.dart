@@ -37,38 +37,58 @@ class ChannelCard extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppRadius.md),
-                  child: CachedNetworkImage(
-                    imageUrl: channel.imageLink,
-                    height: 160,
-                    width: 160,
-                    fit: BoxFit.contain,
-                    placeholder: (context, url) => Container(
-                      height: 80,
-                      width: 80,
-                      decoration: BoxDecoration(
-                        color: AppColors.surfaceLight,
-                        borderRadius: BorderRadius.circular(AppRadius.sm),
-                      ),
-                      child: const Icon(
-                        Icons.tv_rounded,
-                        color: AppColors.textSecondary,
-                        size: 36,
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => Container(
-                      height: 80,
-                      width: 80,
-                      decoration: BoxDecoration(
-                        color: AppColors.surfaceLight,
-                        borderRadius: BorderRadius.circular(AppRadius.sm),
-                      ),
-                      child: const Icon(
-                        Icons.tv_rounded,
-                        color: AppColors.textSecondary,
-                        size: 36,
-                      ),
-                    ),
-                  ),
+                  child: channel.imageLink.startsWith('assets/')
+                      ? Image.asset(
+                          channel.imageLink,
+                          height: 160,
+                          width: 160,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                              color: AppColors.surfaceLight,
+                              borderRadius: BorderRadius.circular(AppRadius.sm),
+                            ),
+                            child: const Icon(
+                              Icons.tv_rounded,
+                              color: AppColors.textSecondary,
+                              size: 36,
+                            ),
+                          ),
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: channel.imageLink,
+                          height: 160,
+                          width: 160,
+                          fit: BoxFit.contain,
+                          placeholder: (context, url) => Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                              color: AppColors.surfaceLight,
+                              borderRadius: BorderRadius.circular(AppRadius.sm),
+                            ),
+                            child: const Icon(
+                              Icons.tv_rounded,
+                              color: AppColors.textSecondary,
+                              size: 36,
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                              color: AppColors.surfaceLight,
+                              borderRadius: BorderRadius.circular(AppRadius.sm),
+                            ),
+                            child: const Icon(
+                              Icons.tv_rounded,
+                              color: AppColors.textSecondary,
+                              size: 36,
+                            ),
+                          ),
+                        ),
                 ),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import '../constants/channels.dart';
 import '../models/channel.dart';
 import '../services/favorites_service.dart';
@@ -13,6 +14,7 @@ class ChannelProvider extends ChangeNotifier {
   bool _showFavoritesOnly = false;
   Set<String> _favorites = {};
   bool _isLoading = true;
+  List<Channel> _allChannels = [];
 
   // ── Getters ──────────────────────────────────────────────────
 
@@ -24,7 +26,7 @@ class ChannelProvider extends ChangeNotifier {
 
   /// Returns the filtered list of channels based on current filters.
   List<Channel> get filteredChannels {
-    return channels.where((channel) {
+    return _allChannels.where((channel) {
       // Category filter
       if (_selectedCategory != 'All' &&
           channel.category != _selectedCategory) {
@@ -49,11 +51,47 @@ class ChannelProvider extends ChangeNotifier {
   // ── Initialization ───────────────────────────────────────────
 
   ChannelProvider() {
-    _loadFavorites();
+    _loadFavoritesAndChannels();
   }
 
-  Future<void> _loadFavorites() async {
+  Future<void> _loadFavoritesAndChannels() async {
     _favorites = await _favoritesService.getFavorites();
+    await _loadM3uChannels();
+  }
+
+  Future<void> _loadM3uChannels() async {
+    List<Channel> loaded = List.from(channels);
+    try {
+      final m3uContent = await rootBundle.loadString('assets/stream/world_cup_matches.m3u');
+      final lines = m3uContent.split('\n');
+      String currentName = '';
+
+      for (var i = 0; i < lines.length; i++) {
+        final line = lines[i].trim();
+        if (line.isEmpty) continue;
+
+        if (line.startsWith('#EXTINF:')) {
+          final commaIndex = line.indexOf(',');
+          if (commaIndex != -1) {
+            currentName = line.substring(commaIndex + 1).trim();
+          }
+        } else if (!line.startsWith('#')) {
+          if (currentName.isNotEmpty && (line.startsWith('http://') || line.startsWith('https://'))) {
+            loaded.add(Channel(
+              name: currentName,
+              type: 'normal',
+              url: line,
+              imageLink: 'assets/icon/bein_sports.png',
+              category: 'World Cup',
+            ));
+          }
+          currentName = '';
+        }
+      }
+    } catch (e) {
+      debugPrint('Error loading/parsing M3U: $e');
+    }
+    _allChannels = loaded;
     _isLoading = false;
     notifyListeners();
   }
