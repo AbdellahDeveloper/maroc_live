@@ -3,7 +3,7 @@ import '../models/channel.dart';
 /// All available categories for filtering.
 const List<String> categories = [
   'All',
-  'World Cup',
+  'Bein Sports',
   'Arriadia Sports',
   '2M',
   'Arriadia HD',

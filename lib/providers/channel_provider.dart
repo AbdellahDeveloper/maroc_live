@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
+
 import '../constants/channels.dart';
 import '../models/channel.dart';
 import '../services/favorites_service.dart';
@@ -28,8 +29,7 @@ class ChannelProvider extends ChangeNotifier {
   List<Channel> get filteredChannels {
     return _allChannels.where((channel) {
       // Category filter
-      if (_selectedCategory != 'All' &&
-          channel.category != _selectedCategory) {
+      if (_selectedCategory != 'All' && channel.category != _selectedCategory) {
         return false;
       }
 
@@ -62,7 +62,9 @@ class ChannelProvider extends ChangeNotifier {
   Future<void> _loadM3uChannels() async {
     List<Channel> loaded = List.from(channels);
     try {
-      final m3uContent = await rootBundle.loadString('assets/stream/world_cup_matches.m3u');
+      final m3uContent = await rootBundle.loadString(
+        'assets/stream/world_cup_matches.m3u',
+      );
       final lines = m3uContent.split('\n');
       String currentName = '';
 
@@ -86,26 +88,32 @@ class ChannelProvider extends ChangeNotifier {
               final name = currentName.substring(0, urlIndex).trim();
               final url = currentName.substring(urlIndex).trim();
               if (name.isNotEmpty && url.isNotEmpty) {
-                loaded.add(Channel(
-                  name: name,
-                  type: 'normal',
-                  url: url,
-                  imageLink: 'assets/icon/bein_sports.png',
-                  category: 'World Cup',
-                ));
+                loaded.add(
+                  Channel(
+                    name: name,
+                    type: 'normal',
+                    url: url,
+                    imageLink: 'assets/icon/bein_sports.png',
+                    category: 'Bein Sports',
+                  ),
+                );
               }
-              currentName = ''; // Handled inline, do not look for URL on the next line
+              currentName =
+                  ''; // Handled inline, do not look for URL on the next line
             }
           }
         } else if (!line.startsWith('#')) {
-          if (currentName.isNotEmpty && (line.startsWith('http://') || line.startsWith('https://'))) {
-            loaded.add(Channel(
-              name: currentName,
-              type: 'normal',
-              url: line,
-              imageLink: 'assets/icon/bein_sports.png',
-              category: 'World Cup',
-            ));
+          if (currentName.isNotEmpty &&
+              (line.startsWith('http://') || line.startsWith('https://'))) {
+            loaded.add(
+              Channel(
+                name: currentName,
+                type: 'normal',
+                url: line,
+                imageLink: 'assets/icon/bein_sports.png',
+                category: 'Bein Sports',
+              ),
+            );
           }
           currentName = '';
         }
