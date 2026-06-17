@@ -74,6 +74,28 @@ class ChannelProvider extends ChangeNotifier {
           final commaIndex = line.indexOf(',');
           if (commaIndex != -1) {
             currentName = line.substring(commaIndex + 1).trim();
+
+            // Check if there is an inline URL
+            final httpIndex = currentName.indexOf('http://');
+            final httpsIndex = currentName.indexOf('https://');
+            final urlIndex = (httpIndex != -1)
+                ? httpIndex
+                : (httpsIndex != -1 ? httpsIndex : -1);
+
+            if (urlIndex != -1) {
+              final name = currentName.substring(0, urlIndex).trim();
+              final url = currentName.substring(urlIndex).trim();
+              if (name.isNotEmpty && url.isNotEmpty) {
+                loaded.add(Channel(
+                  name: name,
+                  type: 'normal',
+                  url: url,
+                  imageLink: 'assets/icon/bein_sports.png',
+                  category: 'World Cup',
+                ));
+              }
+              currentName = ''; // Handled inline, do not look for URL on the next line
+            }
           }
         } else if (!line.startsWith('#')) {
           if (currentName.isNotEmpty && (line.startsWith('http://') || line.startsWith('https://'))) {
